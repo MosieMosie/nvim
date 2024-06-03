@@ -5,3 +5,6 @@ vim.cmd("set shiftwidth=2")
 vim.g.mapleader   = " "
 vim.opt.number    = true
 vim.opt.clipboard = "unnamedplus"
+vim.keymap.set("n", "<leader>h", ":bn <CR>")
+vim.keymap.set("n", "<leader>l", ":bp <CR>")
+vim.keymap.set("n", "<leader>j", ":bd <CR>")
