@@ -10,6 +10,5 @@ return {
   config = function()
     vim.keymap.set("n", "<C-n>", ":Neotree toggle<CR>", {})
     vim.keymap.set("n", "<C-a>", ":Neotree focus<CR>", {})
-    --    vim.keymap.set("n", "<C-n>", ":lua toggle_tree()<CR>", {})
   end,
 }
