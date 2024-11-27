@@ -9,7 +9,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "ts_ls", "pyright" },
+				ensure_installed = { "lua_ls", "ts_ls", "pyright","rust_analyzer"},
 			})
 		end,
 	},
@@ -20,6 +20,7 @@ return {
 			lspconfig.lua_ls.setup({})
 			lspconfig.ts_ls.setup({})
       lspconfig.eslint.setup({})
+      lspconfig.rust_analyzer.setup({})
 			lspconfig.pyright.setup({})
 
 			-- Use LspAttach autocommand to only map the following keys
