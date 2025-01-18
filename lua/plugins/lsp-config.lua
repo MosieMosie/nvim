@@ -9,7 +9,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "ts_ls", "pyright","rust_analyzer"},
+				ensure_installed = { "lua_ls", "ts_ls", "pyright", "rust_analyzer", "gopls"},
 			})
 		end,
 	},
@@ -19,9 +19,27 @@ return {
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({})
 			lspconfig.ts_ls.setup({})
-      lspconfig.eslint.setup({})
-      lspconfig.rust_analyzer.setup({})
+			lspconfig.eslint.setup({})
+			lspconfig.rust_analyzer.setup({})
 			lspconfig.pyright.setup({})
+
+      lspconfig.gopls.setup({
+				settings = {
+					gopls = {
+						gofumpt = true,
+						analyses = {
+							unusedparams = true,
+						},
+						staticcheck = true,
+					},
+				},
+				on_attach = function(_, bufnr)
+					vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
+						vim.lsp.buf.format({ async = true })
+					end, { desc = "Format with LSP" })
+				end,
+			})
+
 
 			-- Use LspAttach autocommand to only map the following keys
 			-- after the language server attaches to the current buffer
