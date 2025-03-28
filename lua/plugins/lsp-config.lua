@@ -9,7 +9,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "tsserver", "pyright" },
+				ensure_installed = { "lua_ls", "ts_ls", "pyright", "rust_analyzer", "gopls" },
 			})
 		end,
 	},
@@ -18,8 +18,27 @@ return {
 		config = function()
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({})
-			lspconfig.tsserver.setup({})
+			lspconfig.ts_ls.setup({})
+			lspconfig.eslint.setup({})
+			lspconfig.rust_analyzer.setup({})
 			lspconfig.pyright.setup({})
+
+			lspconfig.gopls.setup({
+				settings = {
+					gopls = {
+						gofumpt = true,
+						analyses = {
+							unusedparams = true,
+						},
+						staticcheck = true,
+					},
+				},
+				on_attach = function(_, bufnr)
+					vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
+						vim.lsp.buf.format({ async = true })
+					end, { desc = "Format with LSP" })
+				end,
+			})
 
 			-- Use LspAttach autocommand to only map the following keys
 			-- after the language server attaches to the current buffer
@@ -45,11 +64,38 @@ return {
 					vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
 					vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
 					vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
-					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+					-- vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 					vim.keymap.set("n", "<space>f", function()
 						vim.lsp.buf.format({ async = true })
 					end, opts)
+
+					vim.keymap.set("n", "gr", function()
+						require("telescope.builtin").lsp_references()
+					end, { desc = "find references", buffer = ev.buf })
+
+					vim.keymap.set("n", "[e", function()
+						vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+					end, { desc = "Go to previous error", buffer = ev.buf })
+
+					vim.keymap.set("n", "]e", function()
+						vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+					end, { desc = "Go to next error", buffer = ev.buf })
 				end,
+			})
+		end,
+	},
+	{
+		"nvim-telescope/telescope.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("telescope").setup({
+				defaults = {
+					mappings = {
+						i = {
+							["<C-q>"] = require("telescope.actions").send_to_qflist,
+						},
+					},
+				},
 			})
 		end,
 	},

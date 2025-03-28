@@ -1,9 +1,28 @@
+-- return {
+--   "catppuccin/nvim",
+--   name = "catppuccin",
+--   priority = 1000,
+--
+--
+--   config = function()
+--     require("catppuccin").setup({
+--       flavour = "mocha",
+--     })
+--
+--     vim.cmd.colorscheme("catppuccin")
+--   end,
+-- }
 return {
-  "catppuccin/nvim",
-  name = "catppuccin",
+  "navarasu/onedark.nvim",
+  name = "onedark",
   priority = 1000,
 
   config = function()
-    vim.cmd.colorscheme("catppuccin")
+    require("onedark").setup({
+      style = "darker",
+    })
+
+    vim.cmd.colorscheme("onedark") -- Apply the onedarkpro theme
   end,
 }
+
