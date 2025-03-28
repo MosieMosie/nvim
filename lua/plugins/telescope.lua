@@ -6,9 +6,16 @@ return {
 
     config = function()
       local builtin = require("telescope.builtin")
+      local actions = require("telescope.actions")
+
       require("telescope").setup({
         defaults = {
           file_ignore_patterns = { "package%-lock%.json", "%.json", "%.yml" },
+          mappings = {
+            n = {
+              ["<C-c>"] = actions.close,
+            },
+          },
         },
       })
       vim.keymap.set("n", "<C-p>", builtin.find_files, {})
