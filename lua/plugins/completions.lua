@@ -14,27 +14,13 @@ return {
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-      -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
-      -- 'super-tab' for mappings similar to vscode (tab to accept)
-      -- 'enter' for enter to accept
-      -- 'none' for no mappings
-      --
-      -- All presets have the following mappings:
-      -- C-space: Open menu or open docs if already open
-      -- C-n/C-p or Up/Down: Select next/previous item
-      -- C-e: Hide menu
-      -- C-k: Toggle signature help (if signature.enabled = true)
-      --
-      -- See :h blink-cmp-config-keymap for defining your own keymap
       keymap = {
-        preset = "none", -- no default mappings, we define exactly what we want
-
+        preset = "none",
         -- Show completion manually
         ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 
-        -- Accept with Enter, even if nothing selected
+        -- Select movement and completion
         ["<CR>"] = { "select_and_accept", "fallback" },
-
         ["<Tab>"] = {
           function(cmp)
             if cmp.is_visible() then
@@ -43,8 +29,6 @@ return {
           end,
           "fallback",
         },
-
-        -- <S-Tab>: Select previous item if visible, else fallback
         ["<S-Tab>"] = {
           function(cmp)
             if cmp.is_visible() then
@@ -53,8 +37,8 @@ return {
           end,
           "fallback",
         },
-        -- Optional movement and scroll
 
+        -- Optional movement and scroll
         ["<Up>"] = { "select_prev", "fallback" },
         ["<Down>"] = { "select_next", "fallback" },
         ["<C-n>"] = { "select_next", "fallback_to_mappings" },
@@ -73,7 +57,8 @@ return {
       },
 
       -- (Default) Only show the documentation popup when manually triggered
-      completion = { documentation = { auto_show = false } },
+      completion = { documentation = { auto_show = true } },
+      signature = { enabled = true },
 
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
