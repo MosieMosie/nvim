@@ -80,7 +80,7 @@ return {
             enabled = true,
             max_items = 10,
             min_keyword_length = 1, -- Require at least 1 character
-            score_offset = 750, -- High priority, but below LSP
+            score_offset = 750,
           },
           path = {
             name = "Path",
@@ -99,8 +99,8 @@ return {
             name = "Buffer",
             enabled = true,
             max_items = 5,
-            min_keyword_length = 2, -- Require at least 2 characters for buffer completions
-            score_offset = 250, -- Lower priority
+            min_keyword_length = 2,
+            score_offset = 250,
           },
         },
       },
