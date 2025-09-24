@@ -25,4 +25,3 @@ return {
     vim.cmd.colorscheme("onedark") -- Apply the onedarkpro theme
   end,
 }
-
