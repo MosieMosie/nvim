@@ -12,7 +12,6 @@ return {
     -- build = 'nix run .#build-plugin',
 
     ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
     opts = {
       keymap = {
         preset = "none",

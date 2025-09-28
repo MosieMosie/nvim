@@ -4,3 +4,6 @@ vim.keymap.set("n", "<leader>j", ":bd <CR>")
 
 vim.keymap.set("n", "<Esc><Esc>", ":nohlsearch<CR>", { silent = true })
 
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+
+
