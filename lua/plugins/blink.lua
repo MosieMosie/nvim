@@ -51,22 +51,7 @@ return {
 
       appearance = {
         nerd_font_variant = "mono", -- keeps icons aligned
-        menu = {
-          border = "rounded", -- rounded borders
-          scrollbar = true, -- enable scrollbar
-          padding = { 1, 2 }, -- extra padding (top/bottom, left/right)
-        },
-        documentation = {
-          border = "rounded", -- rounded border for docs
-          max_width = 80,
-          max_height = 20,
-        },
-        highlight = {
-          Pmenu = { bg = "#1e1e2e", fg = "#cdd6f4" },
-          PmenuSel = { bg = "#313244", fg = "#f5e0dc" },
-          PmenuBorder = { fg = "#89b4fa" },
-          PmenuDocBorder = { fg = "#94e2d5" },
-        },
+
         -- Custom icon slay away queen.
         kind_icons = {
           Text = "T",
