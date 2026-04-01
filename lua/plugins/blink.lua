@@ -2,7 +2,11 @@ return {
   {
     "saghen/blink.cmp",
     -- optional: provides snippets for the snippet source
-    dependencies = { "L3MON4D3/LuaSnip", version = "v2.*" },
+    dependencies = {
+      "L3MON4D3/LuaSnip",
+      version = "v2.*",
+      "moyiz/blink-emoji.nvim",
+    },
 
     -- use a release tag to download pre-built binaries
     version = "1.*",
@@ -93,7 +97,7 @@ return {
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       snippets = { preset = "luasnip" },
       sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
+        default = { "lsp", "path", "snippets", "buffer", "emoji" },
         providers = {
           lsp = {
             name = "LSP",
@@ -127,6 +131,11 @@ return {
             max_items = 5,
             min_keyword_length = 2,
             score_offset = 250,
+          },
+          emoji = {
+            module = "blink-emoji",
+            name = "Emoji",
+            score_offset = 100,
           },
         },
       },
