@@ -1,13 +1,13 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
+  branch = "main",
+  lazy = false,
   config = function()
-    local config = require("nvim-treesitter.configs")
-    config.setup({
-      auto_install = true,
-      sync_install = false,
-      highlight = { enable = true },
-      indent = { enable = true },
+    vim.api.nvim_create_autocmd("FileType", {
+      callback = function()
+        pcall(vim.treesitter.start)
+      end,
     })
   end,
 }
